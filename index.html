@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Requestor — Test your API</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/prism.css">
+</head>
+<body class="bg-dark text-white container">
+
+	<h1 class="mt-3 mt-sm-4 mt-md-5"><strong>Requestor</strong> — Test your API</h1>
+	<hr class="bg-secondary">
+
+	<div class="row">
+		<div class="col-12 col-lg-6">
+			<h2 class="mb-3">Request</h2>
+
+			<form id="app" @submit.prevent="send">
+
+				<div class="form-row">
+					<div class="col-12 col-sm-auto form-group">
+						<label for="method">Method</label>
+						<select id="method" class="custom-select" v-model="method">
+							<option value="get">GET</option>
+							<option value="put">PUT</option>
+							<option value="post">POST</option>
+							<option value="delete">DELETE</option>
+						</select>
+					</div>
+
+					<div class="col form-group">
+						<label for="endpoint">Endpoint</label>
+						<input id="endpoint" v-model="endpoint" class="form-control col">
+					</div>
+				</div>
+
+				<!-- <hr class="bg-secondary"> -->
+
+				<fieldset v-if="hasBody">
+					<legend>Additional fields</legend>
+					<div v-for="field in fields" class="form-row additional_field">
+						<div class="col input-group mb-3">
+							<input v-model="field.name" class="form-control">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span>=</span>
+								</div>
+							</div>
+							<input v-model="field.value" class="form-control">
+						</div>
+					</div>
+					<button type="button" class="btn btn-secondary" @click="fields.push({})">Add field</button>
+
+					<div>
+						<h4>Additional fields (files)</h4>
+						<div class="row">
+							<div class="col form-group">
+								<div class="custom-file">
+									<input id="file" type="file" class="custom-file-input" placeholder="field name for file">
+									<label id="file_name" class="custom-file-label">Attach your file</label>
+								</div>
+							</div>
+						</label>
+					</div>
+				</fieldset>
+
+				<div class="row">
+					<div class="col form-group">
+						<label for="request">Request</label>
+						<input id="request" v-model="request" class="form-control col">
+					</div>
+				</div>
+
+				<button class="btn btn-primary btn-block btn-lg">Send</button>
+
+			</form>
+
+			<hr class="d-lg-none bg-secondary">
+		</div>
+
+		<div class="col-12 col-lg-6">
+			<h2 class="mb-3">Response:</h2>
+
+			<details>
+				<summary>Headers</summary>
+				<pre class="ml-3"><code id="headers" class="language-json"><span class="muted">It's empty now. Try to enter query</span></code></pre>
+			</details>
+
+
+			<pre style="max-height: 30rem"><code id="response" class="language-json"><span class="muted">It's empty now. Try to enter query</span></code></pre>
+		</div>
+	</div>
+	<hr>
+	<div>
+		<p>
+			<small>
+				<span class="align-middle">View source code on</span>
+				<a target="_blank" href="https://github.com/artemijdeleto/Requestor">
+					<img height="15em" src="github.svg" alt="Requestor">
+				</a>
+			</small>
+		</p>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+	<script src="js/prism.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
