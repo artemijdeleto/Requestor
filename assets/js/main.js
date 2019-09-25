@@ -16,8 +16,8 @@ new Vue({
 	},
 	created() {
 		this.method = localStorage.getItem('latestMethod') || 'get';
-		this.endpoint = localStorage.getItem('latestEndpoint') || 'https://jsonplaceholder.typicode.com/';
-		this.request = localStorage.getItem('latestRequest') || 'users';
+		this.endpoint = localStorage.getItem('latestEndpoint') || 'https://art-desire.ru/Requestor';
+		this.request = localStorage.getItem('latestRequest') || 'assets/placeholder.json';
 	},
 	computed: {
 		hasBody() {
@@ -43,15 +43,17 @@ new Vue({
 				}
 
 				this.fields.map((field) => {
-					console.log(`Adding parameter ${field.name} with value ${field.value}`);
-					data.append(field.name, field.value);
+					if (field.name) {
+						data.append(field.name, field.value);
+					}
 				});
 			}
 
-			fetch(this.endpoint + this.request, {
+			fetch(this.endpoint + '/' + this.request, {
 				mode: 'cors',
-				body: this.hasBody ? data : null,
-				method: this.method
+				redirect: 'follow',
+				method: this.method,
+				body: this.hasBody ? data : null
 			}).then(res => {
 				let headers = {};
 				for (header of res.headers.entries()) {

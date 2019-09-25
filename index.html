@@ -47,27 +47,39 @@
 
 				<fieldset v-if="hasBody">
 					<legend>Additional fields</legend>
-					<div v-for="field in fields" class="form-row additional_field">
-						<div class="col input-group mb-3">
-							<input v-model="field.name" class="form-control">
+					<div v-for="(field, i) in fields" class="form-row additional_field">
+						<div class="col-11 input-group mb-3">
+							<input v-model="field.name" class="form-control" placeholder="Field name">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span>=</span>
 								</div>
 							</div>
-							<input v-model="field.value" class="form-control">
+							<input v-model="field.value" class="form-control" placeholder="Field value">
+						</div>
+						<div class="col-1">
+							<button @click="fields.splice(i, 1)" class="btn btn-danger"><b>X</b></button>
 						</div>
 					</div>
-					<button type="button" class="btn btn-secondary" @click="fields.push({})">Add field</button>
+					<button type="button" class="btn btn-secondary mb-3" @click="fields.push({})">Add field</button>
 
 					<div>
 						<h4>Additional fields (files)</h4>
 						<div class="row">
-							<div class="col form-group">
+							<div class="col-12 input-group mb-3">
+								<input id="file_name" class="form-control" placeholder="File name">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<span>=</span>
+									</div>
+								</div>
 								<div class="custom-file">
 									<input id="file" type="file" class="custom-file-input" placeholder="field name for file">
-									<label id="file_name" class="custom-file-label">Attach your file</label>
+									<label for="file" class="custom-file-label">Attach your file</label>
 								</div>
+							</div>
+							<div class="col form-group">
+								
 							</div>
 						</label>
 					</div>
