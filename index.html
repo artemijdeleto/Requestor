@@ -43,6 +43,25 @@
 					</div>
 				</div>
 
+				<fieldset>
+					<legend>Headers</legend>
+					<div v-for="(header, i) in headers" class="form-row additional_field">
+						<div class="col-11 input-group mb-3">
+							<input v-model="header.name" class="form-control" placeholder="Field name">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span>=</span>
+								</div>
+							</div>
+							<input v-model="header.value" class="form-control" placeholder="Field value">
+						</div>
+						<div class="col-1">
+							<button @click="headers.splice(i, 1)" class="btn btn-danger"><b>X</b></button>
+						</div>
+					</div>
+					<button type="button" class="btn btn-secondary mb-3" @click="headers.push({})">Add header</button>
+				</fieldset>
+
 				<!-- <hr class="bg-secondary"> -->
 
 				<fieldset v-if="hasBody">

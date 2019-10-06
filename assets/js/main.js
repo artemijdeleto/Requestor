@@ -9,10 +9,11 @@ function printError(error) {
 new Vue({
 	el: '#app',
 	data: {
-		fields: [ {} ],
 		method: '',
 		endpoint: '',
-		request: ''
+		request: '',
+		headers: [ {} ],
+		fields: [ {} ]
 	},
 	created() {
 		this.method = localStorage.getItem('latestMethod') || 'get';
@@ -49,10 +50,18 @@ new Vue({
 				});
 			}
 
+			const requestHeaders = new Headers();
+			this.headers.map((header) => {
+				if (header.name) {
+					requestHeaders.append(header.name, header.value);
+				}
+			});
+
 			fetch(this.endpoint + '/' + this.request, {
 				mode: 'cors',
 				redirect: 'follow',
 				method: this.method,
+				headers: requestHeaders,
 				body: this.hasBody ? data : null
 			}).then(res => {
 				let headers = {};
