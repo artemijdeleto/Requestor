@@ -5,6 +5,7 @@
 
 ## Features
 * Change request method
+* Add request headers
 * Add request params
 * View response headers
 
